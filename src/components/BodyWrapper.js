@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import cardsList from '../utils/mockData';
 import RestaurantCard from './RestaurantCard';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BodyWrapper = () => {
   const rawData = cardsList.map(x => x.info);
@@ -52,7 +53,7 @@ const BodyWrapper = () => {
       </div>
         <h2>{filterLabel}</h2>
       <div className='res-container'>
-        { filterDataList?.map((resDataItem)=><RestaurantCard key={resDataItem.id} resData={resDataItem} />)
+        { filterDataList?.map((resDataItem)=><Link key={resDataItem.id}  to={"/restaurant/"+ resDataItem.id}><RestaurantCard resData={resDataItem} /></Link>)
         }
       </div>
     </div>
