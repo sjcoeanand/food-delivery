@@ -3,6 +3,7 @@ import cardsList from '../utils/mockData';
 import RestaurantCard from './RestaurantCard';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 const BodyWrapper = () => {
   const rawData = cardsList.map(x => x.info);
@@ -21,6 +22,11 @@ const BodyWrapper = () => {
     const dataStructured = jsonData?.data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(x => x.info);
     setAllRestaurantData(dataStructured);
     setFilterDataList(dataStructured)
+  }
+
+  const onlineStatus = useOnlineStatus();
+  if(!onlineStatus){
+    return <div className="body">Please Check your network connection and refresh !</div>
   }
 
   return (
@@ -51,7 +57,7 @@ const BodyWrapper = () => {
           }
         }}>{filterLabel}</button>
       </div>
-        <h2>{filterLabel}</h2>
+      <h2>{filterLabel}</h2>
       <div className='res-container'>
         { filterDataList?.map((resDataItem)=><Link key={resDataItem.id}  to={"/restaurant/"+ resDataItem.id}><RestaurantCard resData={resDataItem} /></Link>)
         }

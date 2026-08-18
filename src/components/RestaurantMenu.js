@@ -1,18 +1,16 @@
-import {useEffect, useState } from 'react';
+
 import { useParams } from 'react-router-dom';
+import useGetRestaurantData from '../utils/useGetRestaurantData';
 
 const RestaurantMenu = () => {
-    const [resData, setResData]=useState(null);
+    // const [resData, setResData]=useState(null);
     console.log(useParams())
     const {resId} = useParams();
-    useEffect(()=>{
-        fetchMenu();
-    }, []);
-    const fetchMenu = async ()=> {
-        const api = await fetch(`https://namastedev.com/api/v1/listRestaurantMenu/${resId}`);
-        const result = await api.json();
-        setResData(result)
-    }
+
+    const resData = useGetRestaurantData(resId);
+    console.log("resData ", resData)
+   
+
     if(resData === null) {
         return (<div>Fetching Data</div>)
     } 

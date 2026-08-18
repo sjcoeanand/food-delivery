@@ -60,3 +60,9 @@ body {
     }
   }
 }
+
+.user-card{
+  img{
+    max-width: 200px;
+  }
+}
